@@ -1,0 +1,34 @@
+[gd_scene load_steps=8 format=3 uid="uid://hpuk2j5vkigr"]
+
+[ext_resource type="Script" path="res://Player.cs" id="1_ribar"]
+[ext_resource type="Texture2D" uid="uid://dpfbg7qwy0yud" path="res://bike.png" id="1_u2mej"]
+[ext_resource type="Texture2D" uid="uid://dgpvs6yc2w7xd" path="res://monks_forest_4k.exr" id="2_mw6km"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ssuwa"]
+panorama = ExtResource("2_mw6km")
+
+[sub_resource type="Sky" id="Sky_hrhd6"]
+sky_material = SubResource("PanoramaSkyMaterial_ssuwa")
+
+[sub_resource type="Environment" id="Environment_8cu4f"]
+background_mode = 2
+sky = SubResource("Sky_hrhd6")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tgrql"]
+radius = 0.167126
+height = 3.27148
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_ribar")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.907792, 0.41942, 0, -0.41942, 0.907792, 0, 2.83099, 4.60013)
+environment = SubResource("Environment_8cu4f")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, -0.802518, 0)
+shape = SubResource("CapsuleShape3D_tgrql")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.999874, -0.0158993, 0, 0.0158993, 0.999874, 0, 0, 0, 1, 0, 0, 0)
+texture = ExtResource("1_u2mej")

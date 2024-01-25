@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5osuho1fuhyh"]
+
+[ext_resource type="PackedScene" uid="uid://hpuk2j5vkigr" path="res://Player.tscn" id="1_ibsxa"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a6g0g"]
+
+[node name="Game" type="Node"]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="Floor" type="MeshInstance3D" parent="World"]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 0, 0)
+mesh = SubResource("PlaneMesh_a6g0g")
+
+[node name="Player" parent="World" instance=ExtResource("1_ibsxa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16386, 0)
