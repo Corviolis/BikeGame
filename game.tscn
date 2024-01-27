@@ -1,8 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://c5osuho1fuhyh"]
+[gd_scene load_steps=7 format=3 uid="uid://c5osuho1fuhyh"]
 
 [ext_resource type="PackedScene" uid="uid://hpuk2j5vkigr" path="res://Player.tscn" id="1_ibsxa"]
+[ext_resource type="Texture2D" uid="uid://dgpvs6yc2w7xd" path="res://monks_forest_4k.exr" id="2_jn5m1"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a6g0g"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_vha8s"]
+panorama = ExtResource("2_jn5m1")
+
+[sub_resource type="Sky" id="Sky_hrhd6"]
+sky_material = SubResource("PanoramaSkyMaterial_vha8s")
+
+[sub_resource type="Environment" id="Environment_8jcut"]
+background_mode = 2
+sky = SubResource("Sky_hrhd6")
 
 [node name="Game" type="Node"]
 
@@ -20,3 +31,7 @@ mesh = SubResource("PlaneMesh_a6g0g")
 
 [node name="Player" parent="World" instance=ExtResource("1_ibsxa")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.16386, 0)
+
+[node name="Camera3D" type="Camera3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 0.768306, 0.640083, 0, -0.640083, 0.768306, 0, 9.83099, 14.6001)
+environment = SubResource("Environment_8jcut")
