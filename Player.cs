@@ -7,7 +7,7 @@ public partial class Player : CharacterBody3D
 	[Export]
 	private float _maxTurnDelta = Mathf.Pi/6;	
 	[Export]
-	private float _moveSpeed = 100f;
+	private float _moveSpeed = 10f;
 	[Export]
 	private float _accelerationRate = 500f;
 	[Export]
@@ -16,6 +16,8 @@ public partial class Player : CharacterBody3D
 	private float _brakeFrictionRate = 6f;
 
 	private Sprite3D _sprite;
+
+	private float _oldInputSpeed = 0;
 
 
 	public override void _Ready()
@@ -46,32 +48,23 @@ public partial class Player : CharacterBody3D
 		// interpolate the speed between the current and input speeds
 		// apply it to the forward direction/angle of the bike's rotation
 
-		if (direction != Vector2.Zero) {
+		//if (direction != Vector2.Zero) {
 			// grab the 'length' of the direction, a.k.a. the distance of the joystick from neutral or it's speed
-			float currentSpeed = Mathf.Sqrt(Mathf.Pow(Velocity.X, 2) + Mathf.Pow(Velocity.Y, 2));
+			float currentSpeed = Mathf.Sqrt(Mathf.Pow(Velocity.X, 2) + Mathf.Pow(Velocity.Z, 2));
 			float inputSpeed = Mathf.Sqrt(Mathf.Pow(direction.X, 2) + Mathf.Pow(direction.Y, 2)) * _moveSpeed;
 
-			if (inputSpeed < currentSpeed)
-				inputSpeed = currentSpeed;
-
-			float speed = Mathf.Lerp(currentSpeed, inputSpeed, _accelerationRate * delta);
-
-			GD.Print("cur: " + currentSpeed);
-			GD.Print("in: " + inputSpeed);
-
-			//float speed = inputSpeed > currentSpeed ? currentSpeed : inputSpeed;
-
-
-
+			float speed = currentSpeed;
+			if (inputSpeed > currentSpeed)
+				speed = Mathf.Lerp(currentSpeed, inputSpeed, _accelerationRate * delta);
 
 			// multiply that 'length' by the forward direction of the model
-			Velocity = new Vector3(Mathf.Cos(Rotation.Y), 0 , -Mathf.Sin(Rotation.Y)) * speed * delta;
-		} else {
+			Velocity = new Vector3(Mathf.Cos(Rotation.Y), 0, -Mathf.Sin(Rotation.Y)) * speed;
+		//} else {
 			// slow down
-			//float brakeRatio = (float) Mathf.Clamp(Input.GetActionStrength("brake"), 0.5, 1);
-			//if (brakeRatio > 0.5)
-			//	Velocity = Velocity.Lerp(Vector3.Zero, brakeRatio * _brakeFrictionRate * delta);
-		}
+			float brakeRatio = (float) Mathf.Clamp(Input.GetActionStrength("brake"), 0.5, 1);
+			if (brakeRatio > 0.5)
+				Velocity = Velocity.Lerp(Vector3.Zero, brakeRatio * _brakeFrictionRate * delta);
+		//}
 
 		MoveAndSlide();
 	}
