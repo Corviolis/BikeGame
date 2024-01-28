@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5osuho1fuhyh"]
+[gd_scene load_steps=8 format=3 uid="uid://c5osuho1fuhyh"]
 
 [ext_resource type="PackedScene" uid="uid://hpuk2j5vkigr" path="res://Player.tscn" id="1_ibsxa"]
 [ext_resource type="Texture2D" uid="uid://dgpvs6yc2w7xd" path="res://monks_forest_4k.exr" id="2_jn5m1"]
+[ext_resource type="PackedScene" uid="uid://bqyju7nsqj6tp" path="res://traffic_cone.glb" id="3_uxkas"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a6g0g"]
 
@@ -42,3 +43,21 @@ environment = SubResource("Environment_8jcut")
 remote_path = NodePath("../../PlayerPosition")
 update_rotation = false
 update_scale = false
+
+[node name="traffic_cone" parent="." instance=ExtResource("3_uxkas")]
+transform = Transform3D(0.434189, 0, 0, 0, 0.434189, 0, 0, 0, 0.434189, 1.79865, -9.53674e-07, 2.99326)
+
+[node name="traffic_cone5" parent="." instance=ExtResource("3_uxkas")]
+transform = Transform3D(0.434189, 0, 0, 0, 0.434189, 0, 0, 0, 0.434189, -4.3351, -9.53674e-07, -5.64233)
+
+[node name="traffic_cone6" parent="." instance=ExtResource("3_uxkas")]
+transform = Transform3D(0.434189, 0, 0, 0, 0.434189, 0, 0, 0, 0.434189, -6.9553, -9.53674e-07, 1.21875)
+
+[node name="traffic_cone2" parent="." instance=ExtResource("3_uxkas")]
+transform = Transform3D(0.434189, 0, 0, 0, 0.434189, 0, 0, 0, 0.434189, 7.20769, -9.53674e-07, 1.85507)
+
+[node name="traffic_cone3" parent="." instance=ExtResource("3_uxkas")]
+transform = Transform3D(0.434189, 0, 0, 0, 0.434189, 0, 0, 0, 0.434189, 7.94889, -9.53674e-07, -5.18897)
+
+[node name="traffic_cone4" parent="." instance=ExtResource("3_uxkas")]
+transform = Transform3D(0.434189, 0, 0, 0, 0.434189, 0, 0, 0, 0.434189, 12.9573, -9.53674e-07, -1.5523)
