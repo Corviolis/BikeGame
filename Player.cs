@@ -7,11 +7,11 @@ public partial class Player : CharacterBody3D
 	[Export]
 	private float _maxTurnDelta = Mathf.Pi/6;	
 	[Export]
-	private float _moveSpeed = 15f;
+	private float _moveSpeed = 25f;
 	[Export]
-	private float _accelerationRate = 0.5f;
+	private float _accelerationRate = 0.1f;
 	[Export]
-	private float _frictionRate = 0.8f;
+	private float _frictionRate = 1.2f;
 	[Export]
 	private float _brakeFrictionRate = 6f;
 
