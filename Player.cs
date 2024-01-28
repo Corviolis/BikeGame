@@ -62,13 +62,14 @@ public partial class Player : CharacterBody3D
 		//} else {
 			// slow down
 
-			Velocity = Velocity.Lerp(Vector3.Zero, _frictionRate * delta);
 
 			float brakeRatio = (float) Mathf.Clamp(Input.GetActionStrength("brake"), 0.5, 1);
 			if (brakeRatio > 0.5)
 				Velocity = Velocity.Lerp(Vector3.Zero, brakeRatio * _brakeFrictionRate * delta);
 			else
 				Velocity = new Vector3(Mathf.Cos(Rotation.Y), 0, -Mathf.Sin(Rotation.Y)) * speed;
+
+			Velocity = Velocity.Lerp(Vector3.Zero, _frictionRate * delta);
 		//}
 
 		MoveAndSlide();
