@@ -3,7 +3,7 @@ using Godot;
 public partial class Player : CharacterBody3D
 {
 	[Export]
-	private float _turnSpeed = 7f;	
+	private float _turnSpeed = 0.7f;	
 	[Export]
 	private float _maxTurnDelta = Mathf.Pi/6;	
 	[Export]
@@ -34,8 +34,10 @@ public partial class Player : CharacterBody3D
 		// TODO: add some sort of 'memory', so if you turn 180 it remembers 
 		//   whether your last rotation was clockwise or counter?
 		if (direction != Vector2.Zero) {
+			float currentSpeed = Mathf.Sqrt(Mathf.Pow(Velocity.X, 2) + Mathf.Pow(Velocity.Z, 2));
+
 			float clampedDifference = Mathf.Clamp(Mathf.AngleDifference(Rotation.Y, direction.Angle()), -_maxTurnDelta, _maxTurnDelta);
-			float interpolatedAngle = Mathf.LerpAngle(Rotation.Y, Rotation.Y + clampedDifference, _turnSpeed * delta);
+			float interpolatedAngle = Mathf.LerpAngle(Rotation.Y, Rotation.Y + clampedDifference, _turnSpeed * delta * currentSpeed);
 			Vector3 newRotation = new Vector3(0, interpolatedAngle, 0);
 			Rotation = newRotation;
 		}
@@ -53,7 +55,7 @@ public partial class Player : CharacterBody3D
 
 			float speed = currentSpeed;
 			if (inputSpeed > currentSpeed)
-				speed = Mathf.Clamp(Mathf.Lerp(currentSpeed, inputSpeed, _accelerationRate * delta * _moveSpeed), 0, _moveSpeed);
+				speed = Mathf.Lerp(currentSpeed, inputSpeed, _accelerationRate * delta * _moveSpeed);
 
 			// multiply that 'length' by the forward direction of the model
 
