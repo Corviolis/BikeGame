@@ -11,7 +11,7 @@ public partial class Player : CharacterBody3D
 	[Export]
 	private float _accelerationRate = 500f;
 	[Export]
-	private float _frictionRate = 0.1f;
+	private float _frictionRate = 0.8f;
 	[Export]
 	private float _brakeFrictionRate = 6f;
 
@@ -63,6 +63,9 @@ public partial class Player : CharacterBody3D
 			Velocity = new Vector3(Mathf.Cos(Rotation.Y), 0, -Mathf.Sin(Rotation.Y)) * speed;
 		//} else {
 			// slow down
+
+			Velocity = Velocity.Lerp(Vector3.Zero, _frictionRate * delta);
+
 			float brakeRatio = (float) Mathf.Clamp(Input.GetActionStrength("brake"), 0.5, 1);
 			if (brakeRatio > 0.5)
 				Velocity = Velocity.Lerp(Vector3.Zero, brakeRatio * _brakeFrictionRate * delta);
