@@ -9,15 +9,13 @@ public partial class Player : CharacterBody3D
 	[Export]
 	private float _moveSpeed = 15f;
 	[Export]
-	private float _accelerationRate = 500f;
+	private float _accelerationRate = 0.5f;
 	[Export]
 	private float _frictionRate = 0.8f;
 	[Export]
 	private float _brakeFrictionRate = 6f;
 
 	private Sprite3D _sprite;
-
-	private float _oldInputSpeed = 0;
 
 
 	public override void _Ready()
@@ -55,7 +53,7 @@ public partial class Player : CharacterBody3D
 
 			float speed = currentSpeed;
 			if (inputSpeed > currentSpeed)
-				speed = Mathf.Clamp(Mathf.Lerp(currentSpeed, inputSpeed, _accelerationRate * delta), 0, _moveSpeed);
+				speed = Mathf.Clamp(Mathf.Lerp(currentSpeed, inputSpeed, _accelerationRate * delta * _moveSpeed), 0, _moveSpeed);
 
 			// multiply that 'length' by the forward direction of the model
 
