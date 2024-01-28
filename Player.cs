@@ -7,7 +7,7 @@ public partial class Player : CharacterBody3D
 	[Export]
 	private float _maxTurnDelta = Mathf.Pi/6;	
 	[Export]
-	private float _moveSpeed = 10f;
+	private float _moveSpeed = 30f;
 	[Export]
 	private float _accelerationRate = 500f;
 	[Export]
@@ -53,9 +53,11 @@ public partial class Player : CharacterBody3D
 			float currentSpeed = Mathf.Sqrt(Mathf.Pow(Velocity.X, 2) + Mathf.Pow(Velocity.Z, 2));
 			float inputSpeed = Mathf.Sqrt(Mathf.Pow(direction.X, 2) + Mathf.Pow(direction.Y, 2)) * _moveSpeed;
 
+			GD.Print(currentSpeed);
+
 			float speed = currentSpeed;
 			if (inputSpeed > currentSpeed)
-				speed = Mathf.Lerp(currentSpeed, inputSpeed, _accelerationRate * delta);
+				speed = Mathf.Clamp(Mathf.Lerp(currentSpeed, inputSpeed, _accelerationRate * delta), 0, _moveSpeed);
 
 			// multiply that 'length' by the forward direction of the model
 			Velocity = new Vector3(Mathf.Cos(Rotation.Y), 0, -Mathf.Sin(Rotation.Y)) * speed;
