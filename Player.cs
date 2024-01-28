@@ -11,8 +11,12 @@ public partial class Player : CharacterBody3D
 	[Export]
 	private float _accelerationRate = 500f;
 	[Export]
-	private float _frictionRate = 5f;
+	private float _frictionRate = 0.1f;
+	[Export]
+	private float _brakeFrictionRate = 6f;
+
 	private Sprite3D _sprite;
+
 
 	public override void _Ready()
 	{
@@ -46,13 +50,27 @@ public partial class Player : CharacterBody3D
 			// grab the 'length' of the direction, a.k.a. the distance of the joystick from neutral or it's speed
 			float currentSpeed = Mathf.Sqrt(Mathf.Pow(Velocity.X, 2) + Mathf.Pow(Velocity.Y, 2));
 			float inputSpeed = Mathf.Sqrt(Mathf.Pow(direction.X, 2) + Mathf.Pow(direction.Y, 2)) * _moveSpeed;
+
+			if (inputSpeed < currentSpeed)
+				inputSpeed = currentSpeed;
+
 			float speed = Mathf.Lerp(currentSpeed, inputSpeed, _accelerationRate * delta);
+
+			GD.Print("cur: " + currentSpeed);
+			GD.Print("in: " + inputSpeed);
+
+			//float speed = inputSpeed > currentSpeed ? currentSpeed : inputSpeed;
+
+
+
 
 			// multiply that 'length' by the forward direction of the model
 			Velocity = new Vector3(Mathf.Cos(Rotation.Y), 0 , -Mathf.Sin(Rotation.Y)) * speed * delta;
 		} else {
 			// slow down
-			Velocity = Velocity.Lerp(Vector3.Zero, _frictionRate * delta);
+			//float brakeRatio = (float) Mathf.Clamp(Input.GetActionStrength("brake"), 0.5, 1);
+			//if (brakeRatio > 0.5)
+			//	Velocity = Velocity.Lerp(Vector3.Zero, brakeRatio * _brakeFrictionRate * delta);
 		}
 
 		MoveAndSlide();
