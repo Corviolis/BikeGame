@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://c5osuho1fuhyh"]
 
 [ext_resource type="Texture2D" uid="uid://dgpvs6yc2w7xd" path="res://resources/monks_forest_4k.exr" id="1_7ihyi"]
-[ext_resource type="PackedScene" uid="uid://hpuk2j5vkigr" path="res://characters/you/Player.tscn" id="2_uen22"]
+[ext_resource type="PackedScene" uid="uid://hpuk2j5vkigr" path="res://characters/you/bike/Bike.tscn" id="2_uen22"]
 [ext_resource type="Shader" path="res://resources/tiltshift.gdshader" id="2_x1n5u"]
 [ext_resource type="PackedScene" uid="uid://bqyju7nsqj6tp" path="res://objects/traffic_cone.glb" id="3_k5arf"]
 [ext_resource type="Script" path="res://scenes/CameraShader.cs" id="3_r8i4k"]
@@ -50,11 +50,11 @@ mesh = SubResource("PlaneMesh_a6g0g")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01917, 0)
 
 [node name="Camera3D" type="Camera3D" parent="World/PlayerPosition"]
-transform = Transform3D(1, 0, 0, 0, 0.768306, 0.640083, 0, -0.640083, 0.768306, 0, 9.83099, 14.6001)
+transform = Transform3D(1, 0, 0, 0, 0.843888, 0.536519, 0, -0.536519, 0.843888, 0, 9.83099, 14.6001)
 environment = SubResource("Environment_8jcut")
 
 [node name="CameraShader" type="MeshInstance3D" parent="World/PlayerPosition/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 0.768306, -0.640083, 0, 0.640083, 0.768306, 0, 1.00903, -18.1623)
+transform = Transform3D(1, 0, 0, 0, 0.870862, -0.491527, 0, 0.491527, 0.870862, 0, -0.868528, -17.8254)
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_8f8lv")
 script = ExtResource("3_r8i4k")

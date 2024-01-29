@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class Player : CharacterBody3D
+public partial class Bike : CharacterBody3D
 {
 	[Export]
 	private float _turnSpeed = 0.7f;	
