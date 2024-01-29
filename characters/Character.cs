@@ -1,14 +1,13 @@
 using Godot;
-using System;
 using LilBikerBoi.resources;
 
 [Tool]
 public partial class Character : CharacterBody3D
 {
-	private String _characterName;
+	private string _characterName;
 
 	[Export]
-	public String CharacterName {
+	public string CharacterName {
 		get => _characterName;
 		set {
 			_characterName = value;
@@ -26,7 +25,7 @@ public partial class Character : CharacterBody3D
 
 	private void LoadTexture()
 	{
-		String textureFile = $"res://characters/{_characterName}/{_characterName}.png";
+		string textureFile = $"res://characters/{_characterName}/{_characterName}.png";
 		if (!FileAccess.FileExists(textureFile)) return;
 
 		CompressedTexture2D image = GD.Load<CompressedTexture2D>(textureFile);
@@ -36,6 +35,6 @@ public partial class Character : CharacterBody3D
 
 	public void StartDialog()
 	{
-		//Dialogic.Start(_characterName);
+		DialogicSharp.Start(_characterName);
 	}
 }

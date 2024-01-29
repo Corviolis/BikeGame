@@ -7,12 +7,10 @@ using System;
 public partial class DialogicSharp: Node
 {
   private static GodotObject _dialogic;
-  //private const String DEFAULT_DIALOG_RESOURCE = "res://addons/dialogic/Dialog.tscn";
 
-  static DialogicSharp()
+  public override void _Ready()
   {
-    GDScript script = GD.Load<GDScript>("res://addons/dialogic/Other/DialogicGameHandler.gd");
-    _dialogic = (GodotObject) script.New();
+    _dialogic = GetNode<GodotObject>("/root/Dialogic");
   }
 
   public static String CurrentTimeline
@@ -43,14 +41,14 @@ public partial class DialogicSharp: Node
     }
   }
 
-  public static Node Start(String timeline, bool resetSaves = true, bool debugMode = false)
+  public static Node Start(string timeline, string label = "")
   {
-    return Start<Node>(timeline, resetSaves, debugMode);
+    return Start<Node>(timeline, label);
   }
 
-  public static T Start<T>(String timeline, bool resetSaves = true, bool debugMode = false) where T : Node
+  public static T Start<T>(string timeline, string label = "") where T : Node
   {
-    return (T) _dialogic.Call("start", timeline);
+    return (T) _dialogic.Call("start", timeline, label);
   }
 
   /*public static Node StartFromSave(String timeline, bool debugMode = false)

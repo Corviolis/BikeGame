@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Dialogic="*res://addons/dialogic/Other/DialogicGameHandler.gd"
+DialogicSharp="*res://resources/DialogicSharp.cs"
 
 [dialogic]
 
