@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bqyju7nsqj6tp"
-path="res://.godot/imported/traffic_cone.glb-7d41cb63cbd418772e6f92f0cc91d902.scn"
+path="res://.godot/imported/traffic_cone.glb-bef3acf093eee2672662a06a2e938cdf.scn"
 
 [deps]
 
-source_file="res://traffic_cone.glb"
-dest_files=["res://.godot/imported/traffic_cone.glb-7d41cb63cbd418772e6f92f0cc91d902.scn"]
+source_file="res://objects/traffic_cone.glb"
+dest_files=["res://.godot/imported/traffic_cone.glb-bef3acf093eee2672662a06a2e938cdf.scn"]
 
 [params]
 

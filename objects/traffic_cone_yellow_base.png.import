@@ -2,17 +2,18 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgpvs6yc2w7xd"
-path.bptc="res://.godot/imported/monks_forest_4k.exr-f3fb72c422c6346f90c34a51546d4bac.bptc.ctex"
+uid="uid://ur2wpmanqkuy"
+path.s3tc="res://.godot/imported/traffic_cone_yellow_base.png-8c77c532802efa0aa50ecc1df9b3ffe1.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={}
 
 [deps]
 
-source_file="res://monks_forest_4k.exr"
-dest_files=["res://.godot/imported/monks_forest_4k.exr-f3fb72c422c6346f90c34a51546d4bac.bptc.ctex"]
+source_file="res://objects/traffic_cone_yellow_base.png"
+dest_files=["res://.godot/imported/traffic_cone_yellow_base.png-8c77c532802efa0aa50ecc1df9b3ffe1.s3tc.ctex"]
 
 [params]
 

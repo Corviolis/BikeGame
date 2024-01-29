@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dpfbg7qwy0yud"
-path.s3tc="res://.godot/imported/bike.png-b04ad39b04e130358bfef2d46a541919.s3tc.ctex"
+path.s3tc="res://.godot/imported/bike.png-5bfaf2f2b625d610ea1d15503b741a51.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://bike.png"
-dest_files=["res://.godot/imported/bike.png-b04ad39b04e130358bfef2d46a541919.s3tc.ctex"]
+source_file="res://characters/you/bike.png"
+dest_files=["res://.godot/imported/bike.png-5bfaf2f2b625d610ea1d15503b741a51.s3tc.ctex"]
 
 [params]
 
