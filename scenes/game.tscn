@@ -49,7 +49,6 @@ update_rotation = false
 update_scale = false
 
 [node name="Bike" parent="World" instance=ExtResource("2_uen22")]
-visible = false
 
 [node name="traffic_cone" parent="World" instance=ExtResource("3_k5arf")]
 transform = Transform3D(-0.330578, 0, 0.281493, 0, 0.434189, 0, -0.281493, 0, -0.330578, 1.79865, 0.0379258, 2.99326)

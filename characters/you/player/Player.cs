@@ -2,6 +2,8 @@ using Godot;
 
 public partial class Player : CharacterBody3D
 {
+	public bool MovementActive = false;
+
 	[Export]
 	private float _frictionRate = 140f;
 	[Export]
@@ -20,6 +22,10 @@ public partial class Player : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (!MovementActive) {
+			return;
+		}
+
 		Vector2 direction = Input.GetVector("left", "right", "down", "up");
 		playerMovement(direction, (float)delta);
 		animatePlayer(direction);

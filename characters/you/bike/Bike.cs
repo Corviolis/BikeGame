@@ -3,6 +3,8 @@ using LilBikerBoi.resources;
 
 public partial class Bike : CharacterBody3D
 {
+	public bool MovementActive = false;
+
 	[Export]
 	private float _turnSpeed = 0.7f;	
 	[Export]
@@ -32,7 +34,10 @@ public partial class Bike : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		Vector2 direction = Vector2.Zero; //Input.GetVector("left", "right", "down", "up");
+		if (!MovementActive) {
+			return;
+		}
+		Vector2 direction = Input.GetVector("left", "right", "down", "up");
 		RotateBike(direction, (float)delta);
 		MoveBikeForward(direction, (float)delta);
 	}
