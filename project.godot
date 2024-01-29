@@ -20,8 +20,13 @@ Dialogic="*res://addons/dialogic/Other/DialogicGameHandler.gd"
 
 [dialogic]
 
-directories/dch_directory={}
-directories/dtl_directory={}
+directories/dch_directory={
+"surfer": "res://characters/surfer/surfer.dch",
+"you": "res://characters/you/you.dch"
+}
+directories/dtl_directory={
+"surfer": "res://characters/surfer/surfer.dtl"
+}
 glossary/default_case_sensitive=true
 layout/style_list=[]
 layout/default_style="Default"
