@@ -6,16 +6,16 @@ using System;
 
 public partial class DialogicSharp: Node
 {
-  private GodotObject _dialogic;
+  private static GodotObject _dialogic;
   //private const String DEFAULT_DIALOG_RESOURCE = "res://addons/dialogic/Dialog.tscn";
 
-  public override void _Ready()
+  static DialogicSharp()
   {
     GDScript script = GD.Load<GDScript>("res://addons/dialogic/Other/DialogicGameHandler.gd");
     _dialogic = (GodotObject) script.New();
   }
 
-  public String CurrentTimeline
+  public static String CurrentTimeline
   {
     get
     {
@@ -27,7 +27,7 @@ public partial class DialogicSharp: Node
     }
   }
 
-  public GC.Dictionary Definitions
+  public static GC.Dictionary Definitions
   {
     get
     {
@@ -35,7 +35,7 @@ public partial class DialogicSharp: Node
     }
   }
 
-  public GC.Dictionary DefaultDefinitions
+  public static GC.Dictionary DefaultDefinitions
   {
     get
     {
@@ -43,12 +43,12 @@ public partial class DialogicSharp: Node
     }
   }
 
-  public Node Start(String timeline, bool resetSaves = true, bool debugMode = false)
+  public static Node Start(String timeline, bool resetSaves = true, bool debugMode = false)
   {
     return Start<Node>(timeline, resetSaves, debugMode);
   }
 
-  public T Start<T>(String timeline, bool resetSaves = true, bool debugMode = false) where T : Node
+  public static T Start<T>(String timeline, bool resetSaves = true, bool debugMode = false) where T : Node
   {
     return (T) _dialogic.Call("start", timeline);
   }
@@ -58,27 +58,27 @@ public partial class DialogicSharp: Node
     return StartFromSave<Node>(timeline, DEFAULT_DIALOG_RESOURCE, debugMode);
   }*/
 
-  public T StartFromSave<T>(String timeline, String dialogScenePath, bool debugMode = false) where T : Node
+  public static T StartFromSave<T>(String timeline, String dialogScenePath, bool debugMode = false) where T : Node
   {
     return (T) _dialogic.Call("start", timeline, dialogScenePath, debugMode);
   }
 
-  public String GetVariable(String name)
+  public static String GetVariable(String name)
   {
     return (String) _dialogic.Call("get_variable", name);
   }
 
-  public void SetVariable(String name, String value)
+  public static void SetVariable(String name, String value)
   {
     _dialogic.Call("set_variable", name, value);
   }
 
-  public GC.Dictionary GetGlossary(String name)
+  public static GC.Dictionary GetGlossary(String name)
   {
     return (GC.Dictionary)_dialogic.Call("get_glossary", name);
   }
 
-  public void SetGlossary(String name, String title, String text, String extra)
+  public static void SetGlossary(String name, String title, String text, String extra)
   {
     _dialogic.Call("set_glossary", name, title, text, extra);
   }

@@ -18,16 +18,15 @@ public partial class Bike : CharacterBody3D
 
 	private Sprite3D _sprite;
 
-	private DialogicSharp _dialogicSharp;
-
 
 	public override void _Ready()
 	{
 		_sprite = GetNode<Sprite3D>("Sprite3D");
 
-		_dialogicSharp = GetNode<DialogicSharp>("/root/Dialogic");
 
-		_dialogicSharp.Start("surfer");
+		Node d = DialogicSharp.Start("surfer");
+		GD.Print(d);
+		AddChild(d);
 	}
 
 	public override void _PhysicsProcess(double delta)

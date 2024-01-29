@@ -28,8 +28,8 @@ directories/dtl_directory={
 "surfer": "res://characters/surfer/surfer.dtl"
 }
 glossary/default_case_sensitive=true
-layout/style_list=[]
-layout/default_style="Default"
+layout/style_list=["res://resources/dialogStyle.tres"]
+layout/default_style="res://resources/dialogStyle.tres"
 variables={}
 text/letter_speed=0.01
 text/initial_text_reveal_skippable=true
