@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5osuho1fuhyh"]
+[gd_scene load_steps=10 format=3 uid="uid://c5osuho1fuhyh"]
 
 [ext_resource type="Texture2D" uid="uid://dgpvs6yc2w7xd" path="res://resources/monks_forest_4k.exr" id="1_7ihyi"]
 [ext_resource type="PackedScene" uid="uid://hpuk2j5vkigr" path="res://characters/you/bike/Bike.tscn" id="2_uen22"]
 [ext_resource type="PackedScene" uid="uid://bqyju7nsqj6tp" path="res://objects/traffic_cone.glb" id="3_k5arf"]
 [ext_resource type="PackedScene" uid="uid://mnro08gmvdw5" path="res://characters/you/player/Player.tscn" id="4_0516r"]
+[ext_resource type="PackedScene" path="res://characters/character.tscn" id="5_3dj21"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a6g0g"]
 
@@ -70,3 +71,7 @@ transform = Transform3D(0.129399, 0, -0.414459, 0, 0.434189, 0, 0.414459, 0, 0.1
 
 [node name="traffic_cone4" parent="World" instance=ExtResource("3_k5arf")]
 transform = Transform3D(-0.366785, 0, -0.232356, 0, 0.434189, 0, 0.232356, 0, -0.366785, 12.9573, 0.0379258, -1.5523)
+
+[node name="Character" parent="." instance=ExtResource("5_3dj21")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.6382, 0, -6.35144)
+CharacterName = "surfer"

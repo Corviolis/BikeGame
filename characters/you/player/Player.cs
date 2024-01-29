@@ -2,7 +2,7 @@ using Godot;
 
 public partial class Player : CharacterBody3D
 {
-	public bool MovementActive = false;
+	public bool MovementActive = true;
 
 	[Export]
 	private float _frictionRate = 140f;

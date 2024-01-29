@@ -27,8 +27,6 @@ public partial class Bike : CharacterBody3D
 
 
 		Node d = DialogicSharp.Start("surfer");
-		GD.Print(d);
-		AddChild(d);
 	}
 
 	public override void _PhysicsProcess(double delta)
