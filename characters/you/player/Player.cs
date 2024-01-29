@@ -1,5 +1,7 @@
 using Godot;
 
+namespace LilBikerBoi.characters.you.player;
+
 public partial class Player : CharacterBody3D
 {
 	public bool MovementActive = true;

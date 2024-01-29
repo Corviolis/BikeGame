@@ -1,5 +1,6 @@
 using Godot;
-using LilBikerBoi.resources;
+
+namespace LilBikerBoi.characters.you.bike;
 
 public partial class Bike : CharacterBody3D
 {
@@ -24,9 +25,6 @@ public partial class Bike : CharacterBody3D
 	public override void _Ready()
 	{
 		_sprite = GetNode<Sprite3D>("Sprite3D");
-
-
-		Node d = DialogicSharp.Start("surfer");
 	}
 
 	public override void _PhysicsProcess(double delta)
