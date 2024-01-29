@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://c5osuho1fuhyh"]
+[gd_scene load_steps=9 format=3 uid="uid://c5osuho1fuhyh"]
 
 [ext_resource type="Texture2D" uid="uid://dgpvs6yc2w7xd" path="res://resources/monks_forest_4k.exr" id="1_7ihyi"]
 [ext_resource type="PackedScene" uid="uid://hpuk2j5vkigr" path="res://characters/you/bike/Bike.tscn" id="2_uen22"]
-[ext_resource type="Shader" path="res://resources/tiltshift.gdshader" id="2_x1n5u"]
 [ext_resource type="PackedScene" uid="uid://bqyju7nsqj6tp" path="res://objects/traffic_cone.glb" id="3_k5arf"]
-[ext_resource type="Script" path="res://scenes/CameraShader.cs" id="3_r8i4k"]
+[ext_resource type="PackedScene" uid="uid://mnro08gmvdw5" path="res://characters/you/player/Player.tscn" id="4_0516r"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a6g0g"]
 
@@ -17,20 +16,6 @@ sky_material = SubResource("PanoramaSkyMaterial_vha8s")
 [sub_resource type="Environment" id="Environment_8jcut"]
 background_mode = 2
 sky = SubResource("Sky_hrhd6")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1oi0n"]
-render_priority = 0
-shader = ExtResource("2_x1n5u")
-shader_parameter/focal_point = Vector3(0, 0, 0)
-shader_parameter/DoF = 5.0
-shader_parameter/blur_cap = 2.0
-shader_parameter/blur_rate = 2.0
-shader_parameter/vertical_bias = 1.0
-
-[sub_resource type="QuadMesh" id="QuadMesh_8f8lv"]
-material = SubResource("ShaderMaterial_1oi0n")
-flip_faces = true
-size = Vector2(2, 2)
 
 [node name="Game" type="Node"]
 
@@ -53,36 +38,36 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01917, 0)
 transform = Transform3D(1, 0, 0, 0, 0.843888, 0.536519, 0, -0.536519, 0.843888, 0, 9.83099, 14.6001)
 environment = SubResource("Environment_8jcut")
 
-[node name="CameraShader" type="MeshInstance3D" parent="World/PlayerPosition/Camera3D"]
-transform = Transform3D(1, 0, 0, 0, 0.870862, -0.491527, 0, 0.491527, 0.870862, 0, -0.868528, -17.8254)
-extra_cull_margin = 16384.0
-mesh = SubResource("QuadMesh_8f8lv")
-script = ExtResource("3_r8i4k")
-
-[node name="Player" parent="World" instance=ExtResource("2_uen22")]
+[node name="Player" parent="World" instance=ExtResource("4_0516r")]
+collision_layer = 0
+collision_mask = 0
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="World/Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01917, 0)
 remote_path = NodePath("../../PlayerPosition")
 update_rotation = false
 update_scale = false
 
+[node name="Bike" parent="World" instance=ExtResource("2_uen22")]
+visible = false
+
 [node name="traffic_cone" parent="World" instance=ExtResource("3_k5arf")]
-transform = Transform3D(-0.330578, 0, 0.281493, 0, 0.434189, 0, -0.281493, 0, -0.330578, 1.79865, -9.53674e-07, 2.99326)
+transform = Transform3D(-0.330578, 0, 0.281493, 0, 0.434189, 0, -0.281493, 0, -0.330578, 1.79865, 0.0379258, 2.99326)
 
 [node name="traffic_cone5" parent="World" instance=ExtResource("3_k5arf")]
-transform = Transform3D(0.434189, 0, 0, 0, 0.434189, 0, 0, 0, 0.434189, -4.3351, -9.53674e-07, -5.64233)
+transform = Transform3D(0.434189, 0, 0, 0, 0.434189, 0, 0, 0, 0.434189, -4.3351, 0.0379258, -5.64233)
 
 [node name="traffic_cone6" parent="World" instance=ExtResource("3_k5arf")]
-transform = Transform3D(0.169749, 0, 0.399632, 0, 0.434189, 0, -0.399632, 0, 0.169749, -6.9553, -9.53674e-07, 1.21875)
+transform = Transform3D(0.169749, 0, 0.399632, 0, 0.434189, 0, -0.399632, 0, 0.169749, -6.9553, 0.0379258, 1.21875)
 
 [node name="traffic_cone7" parent="World" instance=ExtResource("3_k5arf")]
-transform = Transform3D(6.44568, 0, 15.1747, 0, 16.4869, 0, -15.1747, 0, 6.44568, -27.5755, -9.53674e-07, 1.21875)
+transform = Transform3D(-11.4895, 0, 11.8241, 0, 16.4869, 0, -11.8241, 0, -11.4895, -27.5755, 1.45402, 1.21875)
 
 [node name="traffic_cone2" parent="World" instance=ExtResource("3_k5arf")]
-transform = Transform3D(-0.32046, 0, -0.292959, 0, 0.434189, 0, 0.292959, 0, -0.32046, 7.20769, -9.53674e-07, 1.85507)
+transform = Transform3D(-0.32046, 0, -0.292959, 0, 0.434189, 0, 0.292959, 0, -0.32046, 7.20769, 0.0379258, 1.85507)
 
 [node name="traffic_cone3" parent="World" instance=ExtResource("3_k5arf")]
-transform = Transform3D(0.129399, 0, -0.414459, 0, 0.434189, 0, 0.414459, 0, 0.129399, 7.94889, -9.53674e-07, -5.18897)
+transform = Transform3D(0.129399, 0, -0.414459, 0, 0.434189, 0, 0.414459, 0, 0.129399, 7.94889, 0.0379258, -5.18897)
 
 [node name="traffic_cone4" parent="World" instance=ExtResource("3_k5arf")]
-transform = Transform3D(-0.366785, 0, -0.232356, 0, 0.434189, 0, 0.232356, 0, -0.366785, 12.9573, -9.53674e-07, -1.5523)
+transform = Transform3D(-0.366785, 0, -0.232356, 0, 0.434189, 0, 0.232356, 0, -0.366785, 12.9573, 0.0379258, -1.5523)

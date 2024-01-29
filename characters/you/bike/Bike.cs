@@ -25,7 +25,7 @@ public partial class Bike : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		Vector2 direction = Input.GetVector("left", "right", "down", "up");
+		Vector2 direction = Vector2.Zero; //Input.GetVector("left", "right", "down", "up");
 		RotateBike(direction, (float)delta);
 		MoveBikeForward(direction, (float)delta);
 	}
