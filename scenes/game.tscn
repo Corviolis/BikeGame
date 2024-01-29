@@ -55,6 +55,7 @@ environment = SubResource("Environment_8jcut")
 
 [node name="CameraShader" type="MeshInstance3D" parent="World/PlayerPosition/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 0.870862, -0.491527, 0, 0.491527, 0.870862, 0, -0.868528, -17.8254)
+visible = false
 extra_cull_margin = 16384.0
 mesh = SubResource("QuadMesh_8f8lv")
 script = ExtResource("3_r8i4k")
