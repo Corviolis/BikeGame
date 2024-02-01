@@ -51,14 +51,16 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p5uhl"]
+height = 1.6752
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_0j14r")
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(0.429985, 0, 0, 0, 0.429985, 0, 0, 0, 0.429985, 0, 0.87399, 0)
 sprite_frames = SubResource("SpriteFrames_yg48t")
 animation = &"idle"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.861683, 0)
 shape = SubResource("CapsuleShape3D_p5uhl")
