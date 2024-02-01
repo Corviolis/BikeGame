@@ -16,10 +16,6 @@ public partial class Player : CharacterBody3D
 		_playerSprite = GetNode<AnimatedSprite3D>("AnimatedSprite3D");
 	}
 	
-	public override void _Process(double delta)
-	{
-	}
-
 	public override void _PhysicsProcess(double delta)
 	{
 		if (!MovementActive) {
@@ -28,7 +24,7 @@ public partial class Player : CharacterBody3D
 
 		Vector2 direction = Input.GetVector("left", "right", "down", "up");
 		playerMovement(direction, (float)delta);
-		animatePlayer(direction);
+		AnimatePlayer(direction);
 	}
 
 	private void playerMovement(Vector2 direction, float delta) {
@@ -41,7 +37,7 @@ public partial class Player : CharacterBody3D
 		MoveAndSlide();
 	}
 
-	private void animatePlayer(Vector2 direction) {
+	private void AnimatePlayer(Vector2 direction) {
 		if (direction == Vector2.Zero) {
 			_playerSprite.Play("idle");
 			return;

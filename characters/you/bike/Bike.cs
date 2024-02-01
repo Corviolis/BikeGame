@@ -25,8 +25,7 @@ public partial class Bike : CharacterBody3D
 	{
 		_sprite = GetNode<Sprite3D>("Sprite3D");
 
-
-		Node d = DialogicSharp.Start("surfer");
+		//Node d = DialogicSharp.Start("surfer");
 	}
 
 	public override void _PhysicsProcess(double delta)
