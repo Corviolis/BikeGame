@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Godot;
 
@@ -48,6 +47,21 @@ public partial class Player : CharacterBody3D
 		Vector2 direction = Input.GetVector("left", "right", "down", "up");
 		PlayerMovement(direction, (float)delta);
 		AnimatePlayer(direction);
+	}
+
+	public override void _Input(InputEvent @event)
+	{
+		if (@event.IsActionPressed("interact")) {
+			// sort overlapping zones so the closest one is the first one in the list
+			currentlyOverlappingZones.Sort(delegate(Area3D x, Area3D y) {
+				float xDif = x.GlobalPosition.DistanceTo(Position);
+				float yDif = y.GlobalPosition.DistanceTo(Position);
+				if (xDif > yDif) return 1;
+				else if (yDif > xDif) return -1;
+				else return 0;
+			});
+			currentlyOverlappingZones[1].
+		}
 	}
 
 	private void PlayerMovement(Vector2 direction, float delta) {

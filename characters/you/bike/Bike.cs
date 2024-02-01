@@ -2,7 +2,7 @@ using Godot;
 
 namespace LilBikerBoi.characters.you.bike;
 
-public partial class Bike : CharacterBody3D
+public partial class Bike : CharacterBody3D, IInteractible
 {
 	public bool MovementActive = false;
 
@@ -21,7 +21,6 @@ public partial class Bike : CharacterBody3D
 
 	private Sprite3D _sprite;
 
-
 	public override void _Ready()
 	{
 		_sprite = GetNode<Sprite3D>("Sprite3D");
@@ -35,6 +34,10 @@ public partial class Bike : CharacterBody3D
 		Vector2 direction = Input.GetVector("left", "right", "down", "up");
 		RotateBike(direction, (float)delta);
 		MoveBikeForward(direction, (float)delta);
+	}
+
+	void IInteractible.Interact() {
+		GD.Print($"{Name}: I was interacted with!");
 	}
 
 	private void RotateBike(Vector2 direction, float delta) {
