@@ -6,12 +6,12 @@ public partial class CameraMovement : Camera3D
 	private float _cameraFollowSpeed = 1f;
 	[Export]
 	private bool _lookAtPlayer = true;
-	private Player _player;
+	private Node3D _player;
 	private Node3D _parent;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		_player = GetNode<Player>("../../Player");
+		_player = GetNode<Node3D>("../../Player");
 		_parent = GetParentNode3D();
 	}
 
