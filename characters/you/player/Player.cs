@@ -60,7 +60,7 @@ public partial class Player : CharacterBody3D
 				else if (yDif > xDif) return -1;
 				else return 0;
 			});
-			currentlyOverlappingZones[1].
+			//currentlyOverlappingZones[0].Interact();
 		}
 	}
 

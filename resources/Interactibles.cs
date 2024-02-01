@@ -1,5 +1,5 @@
 using Godot;
 
-public interface IInteractible : Area3D {
+public interface IInteractible {
 	void Interact();
 }
