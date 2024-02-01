@@ -1,5 +1,6 @@
 using Godot;
 
-public interface IInteractible {
+public interface IInteractibleZone {
 	void Interact();
+	Vector3 ReturnGlobalPosition();
 }

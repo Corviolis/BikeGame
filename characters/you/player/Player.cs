@@ -16,7 +16,7 @@ public partial class Player : CharacterBody3D
 	private Node3D _bike;
 	private Area3D _interactZone;
 	private Sprite3D _interactLabel;
-	private readonly List<Area3D> currentlyOverlappingZones = new();
+	private readonly List<IInteractibleZone> currentlyOverlappingZones = new();
 
 	public override void _Ready()
 	{
@@ -25,9 +25,9 @@ public partial class Player : CharacterBody3D
 		_interactZone = GetNode<Area3D>("InteractZone");
 		_interactLabel = GetNode<Sprite3D>("InteractLabel");
 
-		void incrementAreaEntered(Area3D area) => currentlyOverlappingZones.Add(area);
+		void incrementAreaEntered(Area3D area) => currentlyOverlappingZones.Add(area as IInteractibleZone);
 		_interactZone.AreaEntered += incrementAreaEntered;
-		void decrementAreaEntered(Area3D area) => currentlyOverlappingZones.Remove(area);
+		void decrementAreaEntered(Area3D area) => currentlyOverlappingZones.Remove(area as IInteractibleZone);
 		_interactZone.AreaExited += decrementAreaEntered;
 	}
 
@@ -52,15 +52,17 @@ public partial class Player : CharacterBody3D
 	public override void _Input(InputEvent @event)
 	{
 		if (@event.IsActionPressed("interact")) {
+			if (currentlyOverlappingZones.Count == 0) return;
+
 			// sort overlapping zones so the closest one is the first one in the list
-			currentlyOverlappingZones.Sort(delegate(Area3D x, Area3D y) {
-				float xDif = x.GlobalPosition.DistanceTo(Position);
-				float yDif = y.GlobalPosition.DistanceTo(Position);
+			currentlyOverlappingZones.Sort(delegate(IInteractibleZone x, IInteractibleZone y) {
+				float xDif = x.ReturnGlobalPosition().DistanceTo(Position);
+				float yDif = y.ReturnGlobalPosition().DistanceTo(Position);
 				if (xDif > yDif) return 1;
 				else if (yDif > xDif) return -1;
 				else return 0;
 			});
-			//currentlyOverlappingZones[0].Interact();
+			currentlyOverlappingZones[0].Interact();
 		}
 	}
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c5osuho1fuhyh"]
+[gd_scene load_steps=13 format=3 uid="uid://c5osuho1fuhyh"]
 
 [ext_resource type="Texture2D" uid="uid://dgpvs6yc2w7xd" path="res://resources/monks_forest_4k.exr" id="1_7ihyi"]
 [ext_resource type="Script" path="res://resources/CameraMovement.cs" id="2_5npeh"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bqyju7nsqj6tp" path="res://objects/traffic_cone.glb" id="3_k5arf"]
 [ext_resource type="PackedScene" uid="uid://mnro08gmvdw5" path="res://characters/you/player/Player.tscn" id="4_0516r"]
 [ext_resource type="Texture2D" uid="uid://bmo6jdmvwyoim" path="res://ui/0ubf5ppv.bmp" id="4_sgymp"]
+[ext_resource type="Script" path="res://scenes/InteractZone.cs" id="6_3w3i1"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a6g0g"]
 
@@ -70,6 +71,7 @@ shape = SubResource("SphereShape3D_3hq1b")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 collision_layer = 2
 collision_mask = 2
+script = ExtResource("6_3w3i1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="World/Bike/InteractZone"]
 shape = SubResource("SphereShape3D_3hq1b")
