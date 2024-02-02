@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Godot;
+using LilBikerBoi.characters.you.bike;
 
 namespace LilBikerBoi.characters.you.player;
 
@@ -13,7 +14,7 @@ public partial class Player : CharacterBody3D
 	private float _speed = 1300f;
 
 	private AnimatedSprite3D _playerSprite;
-	private Node3D _bike;
+	private Bike _bike;
 	private Area3D _interactZone;
 	private Sprite3D _interactLabel;
 	private readonly List<IInteractibleZone> currentlyOverlappingZones = new();
@@ -22,7 +23,7 @@ public partial class Player : CharacterBody3D
 	public override void _Ready()
 	{
 		_playerSprite = GetNode<AnimatedSprite3D>("AnimatedSprite3D");
-		_bike = GetNode<Node3D>("../Bike");
+		_bike = GetNode<Bike>("../Bike");
 		_interactZone = GetNode<Area3D>("PlayerInteractZone");
 		_interactLabel = GetNode<Sprite3D>("InteractLabel");
 
@@ -46,15 +47,14 @@ public partial class Player : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (_inInteraction) return;
-
 		if (ridingBike) {
 			Position = new Vector3(_bike.Position.X, 0, _bike.Position.Z);
 			Visible = false;
 			return;
-		} else {
-			Visible = true;
 		}
+		Visible = true;
+
+		if (_inInteraction) return;
 
 		Vector2 direction = Input.GetVector("left", "right", "down", "up");
 		PlayerMovement(direction);
@@ -63,6 +63,12 @@ public partial class Player : CharacterBody3D
 
 	public override void _Input(InputEvent @event)
 	{
+		if (ridingBike)
+		{
+			_bike.InputFromParent(@event);
+			return;
+		}
+
 		if (_inInteraction) return;
 
 		if (@event.IsActionPressed("interact") && !ridingBike) {
