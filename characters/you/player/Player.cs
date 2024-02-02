@@ -26,12 +26,12 @@ public partial class Player : CharacterBody3D
 		_interactZone = GetNode<Area3D>("PlayerInteractZone");
 		_interactLabel = GetNode<Sprite3D>("InteractLabel");
 
-		_interactZone.AreaEntered += (Area3D area) => {
+		_interactZone.AreaEntered += area => {
 			if (area is IInteractibleZone weezer)
 			currentlyOverlappingZones.Add(weezer);
 		};
 
-		_interactZone.AreaExited += (Area3D area) => {
+		_interactZone.AreaExited += area => {
 			if (area is IInteractibleZone weezer)
 			currentlyOverlappingZones.Remove(weezer);
 		};

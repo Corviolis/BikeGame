@@ -58,13 +58,13 @@ public partial class CameraMovement : Camera3D
 		cameraZoom.TweenProperty(this, "position", new Vector3(0, newPosition.Y, newPosition.X), speed)
 			.SetEase(Tween.EaseType.InOut)
 			.FromCurrent()
-			.SetTrans(Tween.TransitionType.Expo);
+			.SetTrans(Tween.TransitionType.Quart);
 		
 		Tween cameraFollow = CreateTween();
 		cameraFollow.TweenProperty(this, "_cameraFollowSpeed", cameraFollowSpeed, speed)
 			.SetEase(Tween.EaseType.InOut)
 			.FromCurrent()
-			.SetTrans(Tween.TransitionType.Expo);
+			.SetTrans(Tween.TransitionType.Quart);
 	}
 
 }
