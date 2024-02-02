@@ -1,10 +1,11 @@
 using Godot;
+using LilBikerBoi.characters.you.player;
 using LilBikerBoi.resources;
 
 namespace LilBikerBoi.characters;
 
 [Tool]
-public partial class Character : CharacterBody3D
+public partial class Character : CharacterBody3D, IInteractible
 {
 	private string _characterName;
 	private MeshInstance3D _marker;
@@ -45,7 +46,7 @@ public partial class Character : CharacterBody3D
 		_sprite.Texture = image;
 	}
 
-	public void StartDialog()
+	public void Interact(Player player)
 	{
 		DialogicSharp.Start(_characterName);
 	}
