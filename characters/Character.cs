@@ -24,8 +24,6 @@ public partial class Character : CharacterBody3D, IInteractible
 	{
 		_sprite = GetNode<Sprite3D>("Sprite3D");
 		_marker = GetNode<MeshInstance3D>("Marker");
-
-		if (Engine.IsEditorHint()) return;
 		LoadTexture();
 	}
 
