@@ -5,7 +5,7 @@ namespace LilBikerBoi.characters.you.bike;
 
 public partial class Bike : CharacterBody3D, IInteractible
 {
-	public bool MovementActive = false;
+	public bool MovementActive;
 
 	[Export]
 	private float _turnSpeed = 0.7f;	
@@ -37,22 +37,19 @@ public partial class Bike : CharacterBody3D, IInteractible
 		MoveBikeForward(direction, (float)delta);
 	}
 
-	public override void _Input(InputEvent @event)
+	public void InputFromParent(InputEvent @event)
 	{
 		if (!MovementActive) {
 			return;
 		}
-		if (@event is InputEventKey keyEvent && keyEvent.Pressed)
+
+		if (@event.IsActionPressed("interact"))
 		{
-			if (keyEvent.Keycode == Key.T)
-			{
-				GD.Print("I got hit");
-				MovementActive = _player.ridingBike = false;
-				_camera.EmitSignal("ChangeCameraToPlayer");
-			}
+			MovementActive = _player.ridingBike = false;
+			_camera.EmitSignal("ChangeCameraToPlayer");
+			_player.FinishInteraction();
 		}
 	}
-
 
 	private void RotateBike(Vector2 direction, float delta) {
 		// TODO: add some sort of 'memory', so if you turn 180 it remembers 
