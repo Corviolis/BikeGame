@@ -17,6 +17,7 @@ public partial class Player : CharacterBody3D
 	private Area3D _interactZone;
 	private Sprite3D _interactLabel;
 	private readonly List<IInteractibleZone> currentlyOverlappingZones = new();
+	private bool _inInteraction = false;
 
 	public override void _Ready()
 	{
@@ -25,16 +26,16 @@ public partial class Player : CharacterBody3D
 		_interactZone = GetNode<Area3D>("PlayerInteractZone");
 		_interactLabel = GetNode<Sprite3D>("InteractLabel");
 
-		void incrementAreaEntered(Area3D area) {
+		void IncrementAreaEntered(Area3D area) {
 			if (area is IInteractibleZone weezer)
-			currentlyOverlappingZones.Add(weezer);
+				currentlyOverlappingZones.Add(weezer);
 		}
-		_interactZone.AreaEntered += incrementAreaEntered;
-		void decrementAreaEntered(Area3D area) {
+		_interactZone.AreaEntered += IncrementAreaEntered;
+		void DecrementAreaEntered(Area3D area) {
 			if (area is IInteractibleZone weezer)
-			currentlyOverlappingZones.Remove(weezer);
+				currentlyOverlappingZones.Remove(weezer);
 		}
-		_interactZone.AreaExited += decrementAreaEntered;
+		_interactZone.AreaExited += DecrementAreaEntered;
 	}
 
 	public override void _Process(double delta)
@@ -45,6 +46,8 @@ public partial class Player : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (_inInteraction) return;
+
 		if (ridingBike) {
 			Position = _bike.Position;
 			return;
@@ -57,6 +60,8 @@ public partial class Player : CharacterBody3D
 
 	public override void _Input(InputEvent @event)
 	{
+		if (_inInteraction) return;
+
 		if (@event.IsActionPressed("interact")) {
 			if (currentlyOverlappingZones.Count == 0) return;
 
@@ -69,6 +74,7 @@ public partial class Player : CharacterBody3D
 				else if (yDif > xDif) return -1;
 				else return 0;
 			});
+			_inInteraction = true;
 			currentlyOverlappingZones[0].Interact(this);
 		}
 	}
@@ -104,5 +110,10 @@ public partial class Player : CharacterBody3D
 				_playerSprite.Play("left");
 			}
 		}
+	}
+
+	public void FinishInteraction()
+	{
+		_inInteraction = false;
 	}
 }

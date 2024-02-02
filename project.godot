@@ -29,7 +29,7 @@ directories/dtl_directory={
 "surfer": "res://characters/surfer/surfer.dtl"
 }
 glossary/default_case_sensitive=true
-layout/style_list=["res://resources/Premade2.tres"]
+layout/style_list=[]
 layout/default_style=""
 variables={}
 text/letter_speed=0.01
