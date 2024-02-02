@@ -1,4 +1,5 @@
 using Godot;
+using LilBikerBoi.characters.you.player;
 
 public partial class InteractZone : Area3D, IInteractibleZone
 {
@@ -9,9 +10,9 @@ public partial class InteractZone : Area3D, IInteractibleZone
 		_parent = GetParent();
 	}
 
-	void IInteractibleZone.Interact() {
+	void IInteractibleZone.Interact(Player player) {
 		if (_parent is IInteractible carl) {
-			carl.Interact();
+			carl.Interact(player);
 		}
 	}
 

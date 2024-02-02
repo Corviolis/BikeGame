@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bqyju7nsqj6tp" path="res://objects/traffic_cone.glb" id="3_k5arf"]
 [ext_resource type="PackedScene" uid="uid://mnro08gmvdw5" path="res://characters/you/player/Player.tscn" id="4_0516r"]
 [ext_resource type="Texture2D" uid="uid://bmo6jdmvwyoim" path="res://ui/0ubf5ppv.bmp" id="4_sgymp"]
-[ext_resource type="Script" path="res://scenes/InteractZone.cs" id="6_3w3i1"]
+[ext_resource type="PackedScene" uid="uid://d1aoifaigf3gx" path="res://resources/interact_zone.tscn" id="6_roqos"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a6g0g"]
 
@@ -67,14 +67,8 @@ shape = SubResource("SphereShape3D_3hq1b")
 
 [node name="Bike" parent="World" instance=ExtResource("2_uen22")]
 
-[node name="InteractZone" type="Area3D" parent="World/Bike"]
+[node name="InteractZone" parent="World/Bike" instance=ExtResource("6_roqos")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-collision_layer = 2
-collision_mask = 2
-script = ExtResource("6_3w3i1")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Bike/InteractZone"]
-shape = SubResource("SphereShape3D_3hq1b")
 
 [node name="traffic_cone" parent="World" instance=ExtResource("3_k5arf")]
 transform = Transform3D(-0.330578, 0, 0.281493, 0, 0.434189, 0, -0.281493, 0, -0.330578, 1.79865, 0.0379258, 2.99326)

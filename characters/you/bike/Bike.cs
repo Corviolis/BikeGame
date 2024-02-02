@@ -1,4 +1,5 @@
 using Godot;
+using LilBikerBoi.characters.you.player;
 
 namespace LilBikerBoi.characters.you.bike;
 
@@ -81,7 +82,7 @@ public partial class Bike : CharacterBody3D, IInteractible
 		MoveAndSlide();
 	}
 
-	void IInteractible.Interact() {
-		GD.Print($"{Name}: i was interacted with!");
+	void IInteractible.Interact(Player player) {
+		GD.Print($"{Name}: i was interacted with by {player.Name}!");
 	}
 }
