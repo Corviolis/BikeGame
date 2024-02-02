@@ -20,12 +20,14 @@ public partial class Character : CharacterBody3D, IInteractible
 		}
 	}
 
+	[Export] public bool Interactable = true;
+
 	public override void _Ready()
 	{
 		_sprite = GetNode<Sprite3D>("Sprite3D");
 		_marker = GetNode<MeshInstance3D>("Marker");
 
-		if (Engine.IsEditorHint()) return;
+		if (!Interactable) GetNode("InteractZone").QueueFree();
 		LoadTexture();
 	}
 
@@ -49,5 +51,6 @@ public partial class Character : CharacterBody3D, IInteractible
 	public void Interact(Player player)
 	{
 		DialogicSharp.Start(_characterName);
+		ToSignal(DialogicSharp.Dialogic, "timeline_ended").OnCompleted(() => player.FinishInteraction());
 	}
 }

@@ -17,6 +17,7 @@ public partial class Player : CharacterBody3D
 	private Area3D _interactZone;
 	private Sprite3D _interactLabel;
 	private readonly List<IInteractibleZone> currentlyOverlappingZones = new();
+	private bool _inInteraction;
 
 	public override void _Ready()
 	{
@@ -45,6 +46,8 @@ public partial class Player : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (_inInteraction) return;
+
 		if (ridingBike) {
 			Position = new Vector3(_bike.Position.X, 0, _bike.Position.Z);
 			Visible = false;
@@ -60,6 +63,8 @@ public partial class Player : CharacterBody3D
 
 	public override void _Input(InputEvent @event)
 	{
+		if (_inInteraction) return;
+
 		if (@event.IsActionPressed("interact") && !ridingBike) {
 			if (currentlyOverlappingZones.Count == 0) return;
 
@@ -69,9 +74,10 @@ public partial class Player : CharacterBody3D
 				float xDif = x.ReturnGlobalPosition().DistanceTo(Position);
 				float yDif = y.ReturnGlobalPosition().DistanceTo(Position);
 				if (xDif > yDif) return 1;
-				else if (yDif > xDif) return -1;
-				else return 0;
+				if (yDif > xDif) return -1;
+				return 0;
 			});
+			_inInteraction = true;
 			currentlyOverlappingZones[0].Interact(this);
 		}
 	}
@@ -107,5 +113,10 @@ public partial class Player : CharacterBody3D
 				_playerSprite.Play("left");
 			}
 		}
+	}
+
+	public void FinishInteraction()
+	{
+		_inInteraction = false;
 	}
 }

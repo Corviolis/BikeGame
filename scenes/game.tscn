@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bqyju7nsqj6tp" path="res://objects/traffic_cone.glb" id="3_k5arf"]
 [ext_resource type="PackedScene" uid="uid://mnro08gmvdw5" path="res://characters/you/player/Player.tscn" id="4_0516r"]
 [ext_resource type="PackedScene" uid="uid://d1aoifaigf3gx" path="res://resources/interact_zone.tscn" id="6_roqos"]
-[ext_resource type="PackedScene" path="res://characters/character.tscn" id="7_a707d"]
+[ext_resource type="PackedScene" uid="uid://b63wtxhwuxe0v" path="res://characters/character.tscn" id="7_7ctti"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a6g0g"]
 
@@ -76,8 +76,6 @@ transform = Transform3D(0.129399, 0, -0.414459, 0, 0.434189, 0, 0.414459, 0, 0.1
 [node name="traffic_cone4" parent="World" instance=ExtResource("3_k5arf")]
 transform = Transform3D(-0.366785, 0, -0.232356, 0, 0.434189, 0, 0.232356, 0, -0.366785, 12.9573, 0.0379258, -1.5523)
 
-[node name="Character" parent="." instance=ExtResource("7_a707d")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.57741, 0, 4.13831)
+[node name="Character" parent="." instance=ExtResource("7_7ctti")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.57335, 0, 5.97959)
 CharacterName = "surfer"
-
-[node name="InteractZone" parent="Character" instance=ExtResource("6_roqos")]
