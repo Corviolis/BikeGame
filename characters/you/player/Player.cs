@@ -25,20 +25,20 @@ public partial class Player : CharacterBody3D
 		_interactZone = GetNode<Area3D>("PlayerInteractZone");
 		_interactLabel = GetNode<Sprite3D>("InteractLabel");
 
-		void incrementAreaEntered(Area3D area) {
+		_interactZone.AreaEntered += (Area3D area) => {
 			if (area is IInteractibleZone weezer)
 			currentlyOverlappingZones.Add(weezer);
-		}
-		_interactZone.AreaEntered += incrementAreaEntered;
-		void decrementAreaEntered(Area3D area) {
+		};
+
+		_interactZone.AreaExited += (Area3D area) => {
 			if (area is IInteractibleZone weezer)
 			currentlyOverlappingZones.Remove(weezer);
-		}
-		_interactZone.AreaExited += decrementAreaEntered;
+		};
 	}
 
 	public override void _Process(double delta)
 	{
+		// Tag interactibles with shader variable when they are closest
 		_interactLabel.Visible = currentlyOverlappingZones.Count > 0;
 
 	}
@@ -46,18 +46,21 @@ public partial class Player : CharacterBody3D
 	public override void _PhysicsProcess(double delta)
 	{
 		if (ridingBike) {
-			Position = _bike.Position;
+			Position = new Vector3(_bike.Position.X, 0, _bike.Position.Z);
+			Visible = false;
 			return;
+		} else {
+			Visible = true;
 		}
 
 		Vector2 direction = Input.GetVector("left", "right", "down", "up");
-		PlayerMovement(direction, (float)delta);
+		PlayerMovement(direction);
 		AnimatePlayer(direction);
 	}
 
 	public override void _Input(InputEvent @event)
 	{
-		if (@event.IsActionPressed("interact")) {
+		if (@event.IsActionPressed("interact") && !ridingBike) {
 			if (currentlyOverlappingZones.Count == 0) return;
 
 			// sort overlapping zones so the closest one is the first one in the list
@@ -73,11 +76,11 @@ public partial class Player : CharacterBody3D
 		}
 	}
 
-	private void PlayerMovement(Vector2 direction, float delta) {
+	private void PlayerMovement(Vector2 direction) {
 		if (direction != Vector2.Zero) {
-			Velocity = new Vector3(direction.X * _speed * delta, 0, -direction.Y * _speed * delta);
+			Velocity = new Vector3(direction.X * _speed, 0, -direction.Y * _speed);
 		} else {
-			Velocity = Velocity.MoveToward(Vector3.Zero, _frictionRate * delta);
+			Velocity = Velocity.MoveToward(Vector3.Zero, _frictionRate);
 		}
 
 		MoveAndSlide();

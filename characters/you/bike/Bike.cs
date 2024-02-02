@@ -21,21 +21,38 @@ public partial class Bike : CharacterBody3D, IInteractible
 	private float _brakeFrictionRate = 6f;
 
 	private Sprite3D _sprite;
+	private CameraMovement _camera;
+	private Player _player;
 
 	public override void _Ready()
 	{
 		_sprite = GetNode<Sprite3D>("Sprite3D");
+		_camera = GetNode<CameraMovement>("/root/Game/World/PlayerPosition/Camera3D");
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (!MovementActive) {
-			return;
-		}
-		Vector2 direction = Input.GetVector("left", "right", "down", "up");
+		Vector2 direction = MovementActive ? Input.GetVector("left", "right", "down", "up") : Vector2.Zero;
 		RotateBike(direction, (float)delta);
 		MoveBikeForward(direction, (float)delta);
 	}
+
+	public override void _Input(InputEvent @event)
+	{
+		if (!MovementActive) {
+			return;
+		}
+		if (@event is InputEventKey keyEvent && keyEvent.Pressed)
+		{
+			if (keyEvent.Keycode == Key.T)
+			{
+				GD.Print("I got hit");
+				MovementActive = _player.ridingBike = false;
+				_camera.EmitSignal("ChangeCameraToPlayer");
+			}
+		}
+	}
+
 
 	private void RotateBike(Vector2 direction, float delta) {
 		// TODO: add some sort of 'memory', so if you turn 180 it remembers 
@@ -75,6 +92,8 @@ public partial class Bike : CharacterBody3D, IInteractible
 	}
 
 	void IInteractible.Interact(Player player) {
-		GD.Print($"{Name}: i was interacted with by {player.Name}!");
+		_player = player;
+		MovementActive = _player.ridingBike = true;
+		_camera.EmitSignal("ChangeCameraToBike");
 	}
 }

@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://hpuk2j5vkigr" path="res://characters/you/bike/Bike.tscn" id="2_uen22"]
 [ext_resource type="PackedScene" uid="uid://bqyju7nsqj6tp" path="res://objects/traffic_cone.glb" id="3_k5arf"]
 [ext_resource type="PackedScene" uid="uid://mnro08gmvdw5" path="res://characters/you/player/Player.tscn" id="4_0516r"]
-[ext_resource type="PackedScene" path="res://resources/interact_zone.tscn" id="6_roqos"]
-[ext_resource type="PackedScene" uid="uid://b63wtxhwuxe0v" path="res://characters/character.tscn" id="7_a707d"]
+[ext_resource type="PackedScene" uid="uid://d1aoifaigf3gx" path="res://resources/interact_zone.tscn" id="6_roqos"]
+[ext_resource type="PackedScene" path="res://characters/character.tscn" id="7_a707d"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a6g0g"]
 
@@ -42,11 +42,13 @@ transform = Transform3D(1, 0, 0, 0, 0.843888, 0.536519, 0, -0.536519, 0.843888, 
 environment = SubResource("Environment_8jcut")
 script = ExtResource("2_5npeh")
 _cameraFollowSpeedPlayer = 0.5
+_lookAtPlayer = false
 
 [node name="Player" parent="World" instance=ExtResource("4_0516r")]
 collision_layer = 0
 collision_mask = 0
-_speed = 600.0
+_frictionRate = 1.4
+_speed = 12.0
 
 [node name="Bike" parent="World" instance=ExtResource("2_uen22")]
 
