@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://c5osuho1fuhyh"]
+[gd_scene load_steps=11 format=3 uid="uid://c5osuho1fuhyh"]
 
 [ext_resource type="Texture2D" uid="uid://dgpvs6yc2w7xd" path="res://resources/monks_forest_4k.exr" id="1_7ihyi"]
 [ext_resource type="Script" path="res://resources/CameraMovement.cs" id="2_5npeh"]
 [ext_resource type="PackedScene" uid="uid://hpuk2j5vkigr" path="res://characters/you/bike/Bike.tscn" id="2_uen22"]
 [ext_resource type="PackedScene" uid="uid://bqyju7nsqj6tp" path="res://objects/traffic_cone.glb" id="3_k5arf"]
 [ext_resource type="PackedScene" uid="uid://mnro08gmvdw5" path="res://characters/you/player/Player.tscn" id="4_0516r"]
-[ext_resource type="Texture2D" uid="uid://bmo6jdmvwyoim" path="res://ui/0ubf5ppv.bmp" id="4_sgymp"]
 [ext_resource type="PackedScene" uid="uid://d1aoifaigf3gx" path="res://resources/interact_zone.tscn" id="6_roqos"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_a6g0g"]
@@ -19,9 +18,6 @@ sky_material = SubResource("PanoramaSkyMaterial_vha8s")
 [sub_resource type="Environment" id="Environment_8jcut"]
 background_mode = 2
 sky = SubResource("Sky_hrhd6")
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_3hq1b"]
-radius = 0.594001
 
 [node name="Game" type="Node"]
 
@@ -50,20 +46,6 @@ _cameraFollowSpeedPlayer = 0.5
 collision_layer = 0
 collision_mask = 0
 _speed = 600.0
-
-[node name="InteractLabel" type="Sprite3D" parent="World/Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.95558, 0)
-pixel_size = 0.005
-billboard = 1
-texture = ExtResource("4_sgymp")
-
-[node name="PlayerInteractZone" type="Area3D" parent="World/Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01917, 0)
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Player/PlayerInteractZone"]
-shape = SubResource("SphereShape3D_3hq1b")
 
 [node name="Bike" parent="World" instance=ExtResource("2_uen22")]
 

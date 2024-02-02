@@ -55,29 +55,21 @@ public partial class Bike : CharacterBody3D, IInteractible
 		// interpolate the speed between the current and input speeds
 		// apply it to the forward direction/angle of the bike's rotation
 
-		//if (direction != Vector2.Zero) {
-			// grab the 'length' of the direction, a.k.a. the distance of the joystick from neutral or it's speed
-			float currentSpeed = Mathf.Sqrt(Mathf.Pow(Velocity.X, 2) + Mathf.Pow(Velocity.Z, 2));
-			float inputSpeed = Mathf.Sqrt(Mathf.Pow(direction.X, 2) + Mathf.Pow(direction.Y, 2)) * _moveSpeed;
+		float currentSpeed = Mathf.Sqrt(Mathf.Pow(Velocity.X, 2) + Mathf.Pow(Velocity.Z, 2));
+		float inputSpeed = Mathf.Sqrt(Mathf.Pow(direction.X, 2) + Mathf.Pow(direction.Y, 2)) * _moveSpeed;
 
-			float speed = currentSpeed;
-			if (inputSpeed > currentSpeed)
-				speed = Mathf.Lerp(currentSpeed, inputSpeed, _accelerationRate * delta * _moveSpeed);
+		float speed = currentSpeed;
+		if (inputSpeed > currentSpeed)
+			speed = Mathf.Lerp(currentSpeed, inputSpeed, _accelerationRate * delta * _moveSpeed);
 
-			// multiply that 'length' by the forward direction of the model
+		float brakeRatio = (float) Mathf.Clamp(Input.GetActionStrength("brake"), 0.5, 1);
+		if (brakeRatio > 0.5){
+			Velocity = Velocity.Lerp(Vector3.Zero, brakeRatio * _brakeFrictionRate * delta);
+		} else {
+			Velocity = new Vector3(Mathf.Cos(Rotation.Y), 0, -Mathf.Sin(Rotation.Y)) * speed;
+		}
 
-		//} else {
-			// slow down
-
-
-			float brakeRatio = (float) Mathf.Clamp(Input.GetActionStrength("brake"), 0.5, 1);
-			if (brakeRatio > 0.5)
-				Velocity = Velocity.Lerp(Vector3.Zero, brakeRatio * _brakeFrictionRate * delta);
-			else
-				Velocity = new Vector3(Mathf.Cos(Rotation.Y), 0, -Mathf.Sin(Rotation.Y)) * speed;
-
-			Velocity = Velocity.Lerp(Vector3.Zero, _frictionRate * delta);
-		//}
+		Velocity = Velocity.Lerp(Vector3.Zero, _frictionRate * delta);
 
 		MoveAndSlide();
 	}
