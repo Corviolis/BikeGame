@@ -22,12 +22,18 @@ public partial class Player : CharacterBody3D
 	{
 		_playerSprite = GetNode<AnimatedSprite3D>("AnimatedSprite3D");
 		_bike = GetNode<Node3D>("../Bike");
-		_interactZone = GetNode<Area3D>("InteractZone");
+		_interactZone = GetNode<Area3D>("PlayerInteractZone");
 		_interactLabel = GetNode<Sprite3D>("InteractLabel");
 
-		void incrementAreaEntered(Area3D area) => currentlyOverlappingZones.Add(area as IInteractibleZone);
+		void incrementAreaEntered(Area3D area) {
+			if (area is IInteractibleZone weezer)
+			currentlyOverlappingZones.Add(weezer);
+		}
 		_interactZone.AreaEntered += incrementAreaEntered;
-		void decrementAreaEntered(Area3D area) => currentlyOverlappingZones.Remove(area as IInteractibleZone);
+		void decrementAreaEntered(Area3D area) {
+			if (area is IInteractibleZone weezer)
+			currentlyOverlappingZones.Remove(weezer);
+		}
 		_interactZone.AreaExited += decrementAreaEntered;
 	}
 
@@ -55,6 +61,7 @@ public partial class Player : CharacterBody3D
 			if (currentlyOverlappingZones.Count == 0) return;
 
 			// sort overlapping zones so the closest one is the first one in the list
+			// TODO: maybe a search would be more efficient?
 			currentlyOverlappingZones.Sort(delegate(IInteractibleZone x, IInteractibleZone y) {
 				float xDif = x.ReturnGlobalPosition().DistanceTo(Position);
 				float yDif = y.ReturnGlobalPosition().DistanceTo(Position);

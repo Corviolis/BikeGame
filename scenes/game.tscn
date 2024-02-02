@@ -57,12 +57,12 @@ pixel_size = 0.005
 billboard = 1
 texture = ExtResource("4_sgymp")
 
-[node name="InteractZone" type="Area3D" parent="World/Player"]
+[node name="PlayerInteractZone" type="Area3D" parent="World/Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01917, 0)
 collision_layer = 2
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Player/InteractZone"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Player/PlayerInteractZone"]
 shape = SubResource("SphereShape3D_3hq1b")
 
 [node name="Bike" parent="World" instance=ExtResource("2_uen22")]

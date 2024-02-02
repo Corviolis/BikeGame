@@ -2,7 +2,7 @@ using Godot;
 
 namespace LilBikerBoi.characters.you.bike;
 
-public partial class Bike : CharacterBody3D
+public partial class Bike : CharacterBody3D, IInteractible
 {
 	public bool MovementActive = false;
 
@@ -79,5 +79,9 @@ public partial class Bike : CharacterBody3D
 		//}
 
 		MoveAndSlide();
+	}
+
+	void IInteractible.Interact() {
+		GD.Print($"{Name}: i was interacted with!");
 	}
 }
