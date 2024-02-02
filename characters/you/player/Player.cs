@@ -17,7 +17,7 @@ public partial class Player : CharacterBody3D
 	private Area3D _interactZone;
 	private Sprite3D _interactLabel;
 	private readonly List<IInteractibleZone> currentlyOverlappingZones = new();
-	private bool _inInteraction = false;
+	private bool _inInteraction;
 
 	public override void _Ready()
 	{
@@ -71,8 +71,8 @@ public partial class Player : CharacterBody3D
 				float xDif = x.ReturnGlobalPosition().DistanceTo(Position);
 				float yDif = y.ReturnGlobalPosition().DistanceTo(Position);
 				if (xDif > yDif) return 1;
-				else if (yDif > xDif) return -1;
-				else return 0;
+				if (yDif > xDif) return -1;
+				return 0;
 			});
 			_inInteraction = true;
 			currentlyOverlappingZones[0].Interact(this);

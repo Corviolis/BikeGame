@@ -20,10 +20,14 @@ public partial class Character : CharacterBody3D, IInteractible
 		}
 	}
 
+	[Export] public bool Interactable = true;
+
 	public override void _Ready()
 	{
 		_sprite = GetNode<Sprite3D>("Sprite3D");
 		_marker = GetNode<MeshInstance3D>("Marker");
+
+		if (!Interactable) GetNode("InteractZone").QueueFree();
 		LoadTexture();
 	}
 
