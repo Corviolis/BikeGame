@@ -43,7 +43,7 @@ public partial class Bike : CharacterBody3D, IInteractible
 			return;
 		}
 
-		if (@event.IsActionPressed("interact"))
+		if (@event.IsActionPressed("interact") || @event.IsActionPressed("back"))
 		{
 			MovementActive = _player.ridingBike = false;
 			_camera.EmitSignal("ChangeCameraToPlayer");
