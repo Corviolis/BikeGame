@@ -80,4 +80,9 @@ public partial class DialogicSharp: Node
   {
     Dialogic.Call("set_glossary", name, title, text, extra);
   }
+
+  public static void TimelineEnded(Action continuation)
+  {
+    Dialogic.ToSignal(Dialogic, "timeline_ended").OnCompleted(continuation);
+  }
 }

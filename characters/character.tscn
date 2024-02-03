@@ -12,7 +12,10 @@ albedo_color = Color(0.823529, 0.494118, 0.454902, 1)
 
 [node name="Character" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_r1cn6")
+Packages = []
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_uc6gd")
