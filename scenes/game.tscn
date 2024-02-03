@@ -41,8 +41,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01917, 0)
 transform = Transform3D(1, 0, 0, 0, 0.843888, 0.536519, 0, -0.536519, 0.843888, 0, 9.83099, 14.6001)
 environment = SubResource("Environment_8jcut")
 script = ExtResource("2_5npeh")
-_cameraFollowSpeedPlayer = 0.5
 _lookAtPlayer = false
+_velocityZoomOffset = 0.2
 
 [node name="Player" parent="World" instance=ExtResource("4_0516r")]
 collision_layer = 0
