@@ -27,7 +27,7 @@ directories/dch_directory={
 "you": "res://characters/you/you.dch"
 }
 directories/dtl_directory={
-"surfer": "res://characters/surfer/surfer.dtl"
+"surfer": "res://characters/surfer/surfer_1.dtl"
 }
 glossary/default_case_sensitive=true
 layout/style_list=[]
@@ -56,7 +56,7 @@ project/assembly_name="LilBikerBoi"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogic/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogic/plugin.cfg", "res://addons/game/plugin.cfg")
 
 [filesystem]
 

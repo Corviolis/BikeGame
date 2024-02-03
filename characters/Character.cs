@@ -23,8 +23,8 @@ public partial class Character : CharacterBody3D, IInteractible
 	}
 
 	[Export] public bool Interactable = true;
-	[Export] public string StreetAddress;
 	[Export] public Array<PackedScene> Packages;
+	[Export] public Array<CompressedTexture2D> PackageLabels;
 
 	public override void _Ready()
 	{
@@ -61,8 +61,7 @@ public partial class Character : CharacterBody3D, IInteractible
 
 	public PackagePool.PackageData GetPackage(int packageIndex)
 	{
-		GD.Print("ugh: " + packageIndex);
-		return new PackagePool.PackageData(this, Packages[packageIndex], StreetAddress);
+		return new PackagePool.PackageData(this, Packages[packageIndex], PackageLabels[packageIndex]);
 	}
 
 	public void Interact(Player player)
@@ -71,11 +70,11 @@ public partial class Character : CharacterBody3D, IInteractible
 
 		if (player.HeldPackage == null || !player.HeldPackage.Character.Equals(this))
 		{
-			DialogicSharp.Start(_characterName + "_default");
+			DialogicSharp.Start(_characterName);
 			return;
 		}
 
-		DialogicSharp.Start(_characterName);
+		DialogicSharp.Start(_characterName + "_" + World.Day);
 		WasDeliveredTo = true;
 	}
 }
