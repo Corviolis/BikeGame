@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 using LilBikerBoi.characters.you.bike;
+using LilBikerBoi.resources;
 
 namespace LilBikerBoi.characters.you.player;
 
@@ -19,6 +20,7 @@ public partial class Player : CharacterBody3D
 	private Sprite3D _interactLabel;
 	private readonly List<IInteractibleZone> currentlyOverlappingZones = new();
 	private bool _inInteraction;
+	public PackagePool.PackageData HeldPackage = null;
 
 	public override void _Ready()
 	{
@@ -28,13 +30,11 @@ public partial class Player : CharacterBody3D
 		_interactLabel = GetNode<Sprite3D>("InteractLabel");
 
 		_interactZone.AreaEntered += area => {
-			if (area is IInteractibleZone weezer)
-			currentlyOverlappingZones.Add(weezer);
+			if (area is IInteractibleZone weezer) currentlyOverlappingZones.Add(weezer);
 		};
 
 		_interactZone.AreaExited += area => {
-			if (area is IInteractibleZone weezer)
-			currentlyOverlappingZones.Remove(weezer);
+			if (area is IInteractibleZone weezer) currentlyOverlappingZones.Remove(weezer);
 		};
 	}
 
@@ -69,9 +69,7 @@ public partial class Player : CharacterBody3D
 			return;
 		}
 
-		if (_inInteraction) return;
-
-		if (@event.IsActionPressed("interact") && !ridingBike) {
+		if (!_inInteraction && @event.IsActionPressed("interact")) {
 			if (currentlyOverlappingZones.Count == 0) return;
 
 			// sort overlapping zones so the closest one is the first one in the list
