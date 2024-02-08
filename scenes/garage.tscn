@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://bcf2rolem3vc6"]
+
+[ext_resource type="PackedScene" uid="uid://mnro08gmvdw5" path="res://characters/you/player/Player.tscn" id="1_7xgos"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_6eiea"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_phl4m"]
+size = Vector3(0.593262, 9.69446, 11.6739)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p6khp"]
+size = Vector3(21.04, 10.0447, 1)
+
+[sub_resource type="Environment" id="Environment_rswvs"]
+ambient_light_source = 1
+
+[node name="Garage" type="Node3D"]
+
+[node name="GarageMesh" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="GarageMesh"]
+transform = Transform3D(21.1934, 0, 0, 0, 0.6, 0, 0, 0, 11.3063, 0, -0.300851, 0)
+mesh = SubResource("BoxMesh_6eiea")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="GarageMesh"]
+transform = Transform3D(21.1934, 0, 0, 0, 0.6, 0, 0, 0, 11.3063, 0, 9.28069, 0)
+mesh = SubResource("BoxMesh_6eiea")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="GarageMesh"]
+transform = Transform3D(21.1934, 0, 0, 0, -2.62268e-08, 10.1379, 0, -0.6, -4.43144e-07, 0, 4.51061, -5.88915)
+mesh = SubResource("BoxMesh_6eiea")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="GarageMesh"]
+transform = Transform3D(-4.18768e-07, 0.6, 0, -9.58029, -2.62268e-08, 0, 0, 0, 11.3063, -10.4166, 4.78898, 0)
+mesh = SubResource("BoxMesh_6eiea")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="GarageMesh"]
+transform = Transform3D(-4.18768e-07, 0.6, 0, -9.58029, -2.62268e-08, 0, 0, 0, 11.3063, 10.4442, 4.78898, 0)
+mesh = SubResource("BoxMesh_6eiea")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="GarageMesh"]
+
+[node name="LeftWall" type="CollisionShape3D" parent="GarageMesh/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4029, 4.34723, -0.0702209)
+shape = SubResource("BoxShape3D_phl4m")
+
+[node name="FrontWall" type="CollisionShape3D" parent="GarageMesh/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.347, 6.11324)
+shape = SubResource("BoxShape3D_p6khp")
+
+[node name="BackWall" type="CollisionShape3D" parent="GarageMesh/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.347, -5.53714)
+shape = SubResource("BoxShape3D_p6khp")
+
+[node name="RightWall" type="CollisionShape3D" parent="GarageMesh/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4279, 4.34723, -0.0702209)
+shape = SubResource("BoxShape3D_phl4m")
+
+[node name="Player" parent="." instance=ExtResource("1_7xgos")]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 28.3343)
+environment = SubResource("Environment_rswvs")
+fov = 31.7

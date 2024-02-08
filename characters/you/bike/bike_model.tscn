@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=3 uid="uid://c65fhqmfigtoy"]
+
+[ext_resource type="PackedScene" uid="uid://dd3qs5m4tqqri" path="res://characters/you/bike/bike.glb" id="1_rrkpl"]
+
+[sub_resource type="Animation" id="Animation_fbcib"]
+resource_name = "TurnLeft"
+length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D:Bone")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -0.695783, -0.126041, 0.695783, 0.126041)
+
+[sub_resource type="Animation" id="Animation_tp0xb"]
+resource_name = "TurnRight"
+length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Armature/Skeleton3D:Bone")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, -0.695783, 0.126041, -0.695783, 0.126041)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5w3oi"]
+_data = {
+"TurnLeft": SubResource("Animation_fbcib"),
+"TurnRight": SubResource("Animation_tp0xb")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wehly"]
+animation = &"TurnLeft"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_onov7"]
+animation = &"TurnRight"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_2t8o2"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_wehly")
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_onov7")
+blend_point_1/pos = 1.0
+value_label = "turn_blend"
+
+[node name="bike" instance=ExtResource("1_rrkpl")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/rotation = Quaternion(0.980304, 0.0154048, -0.0850393, -0.177582)
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="24"]
+libraries = {
+"": SubResource("AnimationLibrary_5w3oi")
+}
+tree_root = SubResource("AnimationNodeBlendSpace1D_2t8o2")
+anim_player = NodePath("../AnimationPlayer")
+parameters/blend_position = -0.110175

@@ -9,9 +9,9 @@ public partial class Player : CharacterBody3D
 	public bool ridingBike = false;
 
 	[Export]
-	private float _frictionRate = 140f;
+	private float _frictionRate = 1.4f;
 	[Export]
-	private float _speed = 1300f;
+	private float _speed = 12f;
 
 	private AnimatedSprite3D _playerSprite;
 	private Bike _bike;

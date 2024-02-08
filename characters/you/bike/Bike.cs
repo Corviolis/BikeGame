@@ -19,15 +19,20 @@ public partial class Bike : CharacterBody3D, IInteractible
 	private float _frictionRate = 1.2f;
 	[Export]
 	private float _brakeFrictionRate = 6f;
+	[Export]
+	private float _handlebarsRotationSpeed = 1f;	
+
 
 	private Sprite3D _sprite;
 	private CameraMovement _camera;
 	private Player _player;
+	private AnimationTree _animator;
+	private float _handlebarsRotation = 0f;
 
 	public override void _Ready()
 	{
-		_sprite = GetNode<Sprite3D>("Sprite3D");
 		_camera = GetNode<CameraMovement>("/root/Game/World/PlayerPosition/Camera3D");
+		_animator = GetNode<AnimationTree>("bike/AnimationTree");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -52,16 +57,34 @@ public partial class Bike : CharacterBody3D, IInteractible
 	}
 
 	private void RotateBike(Vector2 direction, float delta) {
-		// TODO: add some sort of 'memory', so if you turn 180 it remembers 
-		//   whether your last rotation was clockwise or counter?
+		float targetBarsRotation;
+		float interpolatedYAngle;
+		float interpolatedXAngle;
+		// TODO: add some sort of carrythrough, so if you turn 180 it keeps turning in the 
+		//	same direction even if you haven't passed the halfway point yet 
+		//	- this can be saved so you turn the same direction you were previously
+		//	  turning in even if you have hit the halfway point
 		if (direction != Vector2.Zero) {
 			float currentSpeed = Mathf.Sqrt(Mathf.Pow(Velocity.X, 2) + Mathf.Pow(Velocity.Z, 2));
 
 			float clampedDifference = Mathf.Clamp(Mathf.AngleDifference(Rotation.Y, direction.Angle()), -_maxTurnDelta, _maxTurnDelta);
-			float interpolatedAngle = Mathf.LerpAngle(Rotation.Y, Rotation.Y + clampedDifference, _turnSpeed * delta * currentSpeed);
-			Vector3 newRotation = new Vector3(0, interpolatedAngle, 0);
-			Rotation = newRotation;
+			interpolatedYAngle = Mathf.LerpAngle(Rotation.Y, Rotation.Y + clampedDifference, _turnSpeed * delta * currentSpeed);
+			
+			float xRollAngle = (-clampedDifference * currentSpeed) / 30;
+			interpolatedXAngle = Mathf.MoveToward(Rotation.X, xRollAngle, 0.1f);
+
+			targetBarsRotation = -clampedDifference;
+			_handlebarsRotation = Mathf.Lerp(_handlebarsRotation, targetBarsRotation, _handlebarsRotationSpeed);
+		} else {
+			_handlebarsRotation = Mathf.Lerp(_handlebarsRotation, 0, 0.15f);
+			interpolatedYAngle = Rotation.Y;
+			interpolatedXAngle = Mathf.MoveToward(Rotation.X, 0, 0.02f);
 		}
+		
+		Vector3 newRotation = new Vector3(interpolatedXAngle, interpolatedYAngle, 0);
+		Rotation = newRotation;
+
+		_animator.Set("parameters/blend_position", _handlebarsRotation);	
 	}
 
 	private void MoveBikeForward(Vector2 direction, float delta) {

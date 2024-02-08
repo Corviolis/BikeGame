@@ -57,6 +57,16 @@ project/assembly_name="LilBikerBoi"
 
 enabled=PackedStringArray("res://addons/dialogic/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://characters/": "yellow",
+"res://objects/": "orange",
+"res://resources/": "purple",
+"res://scenes/": "red",
+"res://ui/": "green"
+}
+
 [filesystem]
 
 import/blender/enabled=false
